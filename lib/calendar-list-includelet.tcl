@@ -1,5 +1,5 @@
 ad_page_contract {
-    The display logic for the calendar portlet
+    The display logic for the calendar includelet
 
     @author Arjun Sanyal (arjun@openforce.net)
     @cvs_id $Id$
@@ -72,6 +72,6 @@ set thirty_days [expr 60*60*24*30]
 set start_date [ns_fmttime [expr [ns_time] - $thirty_days] "%Y-%m-%d 00:00"]
 
 set url_template "?view=list&sort_by=\$order_by&page_num=$page_num" 
-set url_stub_callback "calendar_portlet_display::get_url_stub" 
+set url_stub_callback "calendar_includelet_display::get_url_stub" 
 
 ad_return_template

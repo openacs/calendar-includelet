@@ -67,7 +67,7 @@ if {$create_p} {
     set item_add_template ""
 }
 
-set url_stub_callback "calendar_portlet_display::get_url_stub" 
+set url_stub_callback "calendar_includelet_display::get_url_stub" 
 
 if { $view == "day" } {
     if {[catch {set yest [clock format [clock scan "1 day ago" -base [clock scan $date]] -format "%Y-%m-%d"]}]} {

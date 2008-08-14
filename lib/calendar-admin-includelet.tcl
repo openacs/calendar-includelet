@@ -1,5 +1,5 @@
 ad_page_contract {
-    The display logic for the calendar admin portlet
+    The display logic for the calendar admin includelet
 
     @author Arjun Sanyal (arjun@openforce.net)
     @author Ben Adida (ben@openforce.net)
