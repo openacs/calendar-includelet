@@ -22,6 +22,7 @@ ad_page_contract {
     }
 }
 
+template::head::add_css -href /resources/calendar/calendar.css
 
 # get stuff out of the config array
 if { $view eq "" } {

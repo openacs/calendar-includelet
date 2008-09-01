@@ -22,6 +22,8 @@ ad_page_contract {
 }
 
 
+template::head::add_css -href /resources/calendar/calendar.css
+
 # get stuff out of the config array
 set view $default_view
 set list_of_calendar_ids $calendar_id
