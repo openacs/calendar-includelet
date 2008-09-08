@@ -4,90 +4,90 @@
   base_url="@ad_conn_url@"
   page_num="@page_num@"
   view="@view@">
-
-<table id="valign-hack" border="0" width="100%">
-  <tr>
-    <td valign="top" style="width: 200px">
+  <div id="viewadp-mini-calendar">
 
       <include src="/packages/calendar/www/mini-calendar" 
         view="@view@" 
         date="@date@" 
-        page_num="@page_num@">
+        page_num="@page_num@"
+      >
  
       <p>
-        <if @create_p@> 
-          <a href="@add_item_url@" title="#calendar-portlet.Add_an_item#" class="button">#calendar-portlet.Add_an_item#</a>
-        </if>
-        <if @admin_p@>
-          <a href="@calendar_url@calendar-item-types?calendar_id=@force_calendar_id@" title="#calendar-portlet.Manage_Item_Types#" class="button">#calendar-portlet.Manage_Item_Types#</a>
+        <a href="@add_item_url@" title="#calendar.Add_Item#" class="button">#calendar.Add_Item#</a>
+        <if "@admin_p@">
+          <a href="admin/" title="#calendar.lt_Calendar_Administrati#" class="button">
+            #calendar.lt_Calendar_Administrati#
+          </a>
         </if>
       </p>
+      <p>
+        @notification_chunk;noquote@
+      </p>
+      <if @calendars:rowcount@ gt 0>
+        <p>
+          #calendar.Calendars#:
+          <ul>
+            <multiple name="calendars">
+            <li> @calendars.calendar_name@
+              <if @calendars.calendar_admin_p@ true>
+                [<a href="@calendars.url@" title="#calendar.Manage_Item_Types#">#calendar.Manage_Item_Types#</a>]
+              </if>
+            </multiple>
+          </ul>
+        </if>
 
-    </td>
+       <p>
 
-    <td valign=top>
+  </div>
+  <div id="viewadp-cal-table">
 
-      <switch @view@>
+      <switch "@view@">
          <case value="day">
-           <include src="/packages/calendar/www/view-one-day-display" 
-           date="@date@" 
-           start_display_hour=7 
-           end_display_hour=22
-           page_num=@page_num@
-           hour_template="@hour_template;noquote@" 
-           item_template="@item_template;noquote@"
-           calendar_id_list=@calendar_id@ 
-           item_add_template="@item_add_template;noquote@"
-           prev_nav_template="@previous_link;noquote@"
-           next_nav_template="@next_link;noquote@"
-           base_url="@base_url@calendar/"
-           url_stub_callback="@url_stub_callback;noquote@" 
-           return_url="@encoded_return_url;noquote@">
+          <include src="/packages/calendar/www/view-one-day-display" 
+            portlet_mode_p="1"
+            date="@date@" 
+            start_display_hour="7"
+            end_display_hour="22"
+            page_num="@page_num@"
+            calendar_id_list="@calendar_id@"
+            base_url="@base_url@"
+            calendar_url="@calendar_url@"
+            return_url="@return_url;noquote@">
          </case>
 
         <case value="list">
-           <include src="/packages/calendar/www/view-list-display" 
-           start_date=@start_date@ 
-           end_date=@end_date@ 
-           date=@current_date@ 
-           period_days=@period_days@
-           item_template="@item_template;noquote@"
-           calendar_id_list=@calendar_id@ 
-           url_template="@url_template;noquote@" 
-           url_stub_callback="@url_stub_callback;noquote@" 
-           page_num=@page_num@
-           return_url="@encoded_return_url;noquote@">
+          <include src="/packages/calendar/www/view-list-display" 
+            start_date="@start_date@"
+            end_date="@end_date@"
+            date="@date@"
+            period_days="@period_days@"
+            calendar_id_list="@calendar_id@"
+            page_num="@page_num@"
+            return_url="@return_url;noquote@">
         </case>
 
         <case value="week">
-           <include src="/packages/calendar/www/view-week-display" 
-           date="@current_date@"
-           calendar_id_list=@calendar_id@ 
-           base_url="@base_url@calendar/"
-           item_template="@item_template;noquote@"
-           page_num=@page_num@
-           prev_week_template="@prev_week_template;noquote@"
-           next_week_template="@next_week_template;noquote@"
-           return_url="@encoded_return_url;noquote@"
-           url_stub_callback="@url_stub_callback;noquote@"
-           export=@export@>
+          <include src="/packages/calendar/www/view-week-display" 
+            portlet_mode_p="1"
+            date="@date@"
+            calendar_id_list="@calendar_id@"
+            page_num="@page_num@"
+            calendar_url="@calendar_url@"
+            return_url="@return_url;noquote@"
+            export="@export@">
          </case>
 
         <case value="month">
-           <include src="/packages/calendar/www/view-month-display"
-           date=@current_date@
-           calendar_id_list=@calendar_id@ 
-           item_template="@item_template;noquote@"
-           base_url="@base_url@calendar/"
-           page_num=@page_num@
-           prev_month_template="@prev_month_template;noquote@"
-           next_month_template="@next_month_template;noquote@"
-           url_stub_callback="@url_stub_callback;noquote@"
-           show_calendar_name_p="@show_calendar_name_p;noquote@"
-           return_url="@encoded_return_url;noquote@"
-           export=@export@>
+          <include src="/packages/calendar/www/view-month-display"
+            portlet_mode_p="1"
+            date="@date@"
+            calendar_id_list="@calendar_id@"
+            base_url="@base_url@calendar/"
+            page_num="@page_num@"
+            show_calendar_name_p="@show_calendar_name_p;noquote@"
+            return_url="@return_url;noquote@"
+            calendar_url="@calendar_url@"
+            export="@export@">
         </case>
       </switch>
-    </td>
-  </tr>
-</table>
+</div>

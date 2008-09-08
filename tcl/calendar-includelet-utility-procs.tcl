@@ -43,6 +43,7 @@ ad_proc calendar_includelet_utilities::configure_calendar_id {
     set package_id [layout::element::get_column_value \
                        -element_id $element_id \
                        -column package_id]
+    set node_id [site_node::get_node_id_from_object_id -object_id $package_id]
     set party_id [layout::pageset::get_column_value \
                      -pageset_id $pageset_id \
                      -column owner_id]
@@ -63,23 +64,8 @@ ad_proc calendar_includelet_utilities::configure_calendar_id {
                                   -package_id $package_id]
         }
 
-    } else {
-
-        # We're initializing a personal portal.  Create a calendar for the user
-        # if they don't already have one.  The group calendar's id has already been
-        # copied over by the portal package.
-
-        if { ![db_0or1row get_calendar_id {}] } {
-            set calendar_id [calendar::new \
-                                -owner_id $party_id \
-                                -private_p t \
-                                -calendar_name Personal \
-                                -package_id $package_id]
-        }
+        layout::element::parameter::add_values \
+            -element_id $element_id \
+            -parameters [list calendar_id $calendar_id default_view day scoped_p f]
     }
-
-    layout::element::parameter::add_values \
-        -element_id $element_id \
-        -parameters [list calendar_id $calendar_id default_view day scoped_p f]
-
 }

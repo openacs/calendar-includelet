@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<message_catalog package_key="calendar-includelet"  locale="sh_HR" charset="utf-8">
+<message_catalog package_key="calendar-includelet" locale="sh_HR" charset="utf-8">
 
   <msg key="Add_an_item">Dodaj stavku</msg>
   <msg key="full_includelet_pretty_name">Citav Kalendar</msg>
