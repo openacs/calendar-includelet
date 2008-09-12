@@ -1,4 +1,5 @@
 <include src="/packages/calendar/www/view-list-display" 
+  return_url="@return_url;noquote"
   start_date="@start_date@"
   date="@date@" 
   period_days="@period_days@"

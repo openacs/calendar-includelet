@@ -23,6 +23,7 @@ ad_page_contract {
 }
 
 template::head::add_css -href /resources/calendar/calendar.css
+set return_url "[ns_conn url]?[ns_conn query]"
 
 # set up some vars
 if {[empty_string_p $date]} {
