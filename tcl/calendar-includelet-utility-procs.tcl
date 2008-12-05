@@ -28,40 +28,37 @@ namespace eval calendar_includelet_utilities {}
 ad_proc calendar_includelet_utilities::configure_calendar_id {
     element_id
 } {
-    Set the includelet's calendar_id param, creating a new private calendar for the
-    includelet's owner if necessary.
+    Set the includelet's calendar_id param, creating a new group calendar for the
+    subsite if we're initializing its master template.
+
+    DRB: This is really messed up, won't work except for a subsite master.
 
     @param element_id The calendar includelet
 
 } {
+    array set element [layout::element::get -element_id $element_id]
 
     set pageset_id [layout::page::get_column_value \
-                        -page_id [layout::element::get_column_value \
-                                     -element_id $element_id \
-                                     -column page_id] \
+                        -page_id $element(page_id) \
                         -column pageset_id]
-    set package_id [layout::element::get_column_value \
-                       -element_id $element_id \
-                       -column package_id]
-    set node_id [site_node::get_node_id_from_object_id -object_id $package_id]
-    set party_id [layout::pageset::get_column_value \
-                     -pageset_id $pageset_id \
-                     -column owner_id]
- 
-    if { $pageset_id == [layout::pageset::get_master_template_id] } {
+    array set pageset [layout::pageset::get -pageset_id $pageset_id]
+    set group_id [application_group::group_id_from_package_id \
+                     -no_complain \
+                     -package_id $pageset(package_id)]
 
-        # We're initializing the master template's or admin portal's copy of
-        # calendar, create a subsite group calendar if one does not already exist.
+    if { [layout::pageset::is_master_template_p \
+             -package_id $pageset(package_id) -pageset_id $pageset_id] &&
+         $group_id ne "" } {
 
-        set group_id [application_group::group_id_from_package_id \
-                         -package_id [ad_conn subsite_id]]
+        # We're initializing the master template for a subsite or other package that
+        # provides an application group for itself.  Create a group calendar.
 
         if { ![db_0or1row get_group_calendar_id {}] } {
             set calendar_id [calendar::new \
                                   -owner_id $group_id \
                                   -private_p "f" \
                                   -calendar_name Group \
-                                  -package_id $package_id]
+                                  -package_id $element(package_id)]
         }
 
         layout::element::parameter::add_values \
