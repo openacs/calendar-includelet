@@ -79,7 +79,7 @@ multirow create calendars calendar_name calendar_id calendar_admin_p url
 foreach calendar $calendar_id {
     multirow append calendars [calendar::name $calendar] $calendar \
         [permission::permission_p -object_id $calendar -privilege admin] \
-        [export_vars -base ${calendar_url}calendar-item-types {calendar_id}]
+        [export_vars -base ${calendar_url}calendar-item-types {{calendar_id $calendar}}]
 }
 
 if {$view eq "list"} {
