@@ -11,10 +11,10 @@ ad_page_contract {
     {julian_date ""}
     {sort_by ""}
 } -properties {
-    
+
 }  -validate {
     valid_date -requires { date } {
-        if {![string equal $date ""]} {
+        if {$date ne ""} {
             if {[catch {set date [clock format [clock scan $date] -format "%Y-%m-%d"]} err]} {
                 ad_complain "Your input ($date) was not valid. It has to be in the form YYYYMMDD."
             }
@@ -26,8 +26,8 @@ template::head::add_css -href /resources/calendar/calendar.css
 set return_url "[ns_conn url]?[ns_conn query]"
 
 # set up some vars
-if {[empty_string_p $date]} {
-    if {[empty_string_p $julian_date]} {
+if {$date eq ""} {
+    if {$julian_date eq ""} {
         set date [dt_sysdate]
     } else {
         set date [db_string select_from_julian "select to_date(:julian_date ,'J') from dual"]
@@ -47,7 +47,7 @@ if {$scoped_p == "t"} {
 }
 
 # Note that the variable calendar_id is a list of all calendar_id parameter values set for
-# this layout element.  
+# this layout element.
 
 set private_calendar_id [calendar_includelet::get_private_calendar_id \
                         -user_id [ad_conn user_id] \

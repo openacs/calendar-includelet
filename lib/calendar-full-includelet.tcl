@@ -12,7 +12,7 @@ ad_page_contract {
     {export ""}
     {sort_by ""}
 } -properties {
-    
+
 } -validate {
     valid_date -requires { date } {
         if {![string equal $date ""]} {
@@ -24,14 +24,14 @@ ad_page_contract {
 }
 
 # Note that the variable calendar_id is a list of all calendar_id parameter values set for
-# this layout element.  
+# this layout element.
 
 set private_calendar_id [calendar_includelet::get_private_calendar_id \
                         -user_id [ad_conn user_id] \
                         -package_id $package_id]
 lappend calendar_id $private_calendar_id
 
-if {[empty_string_p $view]} {
+if { $view eq "" } {
     set view $default_view
 }
 
@@ -65,7 +65,7 @@ if { ![info exists period_days] } {
 set admin_p [permission::permission_p -object_id $package_id -privilege admin]
 
 # set up some vars
-if {[empty_string_p $date]} {
+if { $date eq "" } {
     set date [dt_sysdate]
 }
 
@@ -98,4 +98,4 @@ if { [lsearch [list csv vcalendar] $export] != -1 } {
     ad_script_abort
 }
 
-ad_return_template 
+ad_return_template
