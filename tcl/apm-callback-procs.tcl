@@ -6,7 +6,7 @@ ad_library {
 
     @creation-date 2003-12-31
     @author Don Baccus <dhogaza@pacifier.com>
-    @cvs-id 
+    @cvs-id $Id$
 }
 
 namespace eval calendar_includelet::install {}

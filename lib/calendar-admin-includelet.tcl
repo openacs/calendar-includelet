@@ -3,7 +3,7 @@ ad_page_contract {
 
     @author Arjun Sanyal (arjun@openforce.net)
     @author Ben Adida (ben@openforce.net)
-    @cvs_id $Id$
+    @cvs-id $Id$
 } {
     {period_days:optional}
 } -properties {

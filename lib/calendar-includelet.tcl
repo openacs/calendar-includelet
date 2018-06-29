@@ -2,7 +2,7 @@ ad_page_contract {
     The display logic for the calendar includelet
 
     @author Arjun Sanyal (arjun@openforce.net)
-    @cvs_id $Id$
+    @cvs-id $Id$
 } {
     {view ""}
     {page_num ""}
